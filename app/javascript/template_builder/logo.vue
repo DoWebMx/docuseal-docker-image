@@ -1,3 +1,4 @@
+<!--
 <template>
   <svg
     height="40"
@@ -17,10 +18,26 @@
       r="2.829"
     />
   </svg>
+  <img src="/logo.svg" :class="className" alt="DoWebMx Logo" />
 </template>
 
 <script>
 export default {
   name: 'ProjectLogo'
+}
+</script>
+-->
+<template>
+  <img src="/logo.svg" :class="className" alt="DoWebMx Logo" />
+</template>
+
+<script>
+export default {
+  props: {
+    className: {
+      type: String,
+      default: ''
+    }
+  }
 }
 </script>
