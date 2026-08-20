@@ -1,0 +1,44 @@
+# 1. Imagen base oficial
+# FROM docuseal/docuseal:latest
+FROM docuseal/docuseal:3.2.1
+
+# 2. Definición de ARG para recibir valores en el build (con fallbacks predeterminados)
+ARG COMPANY_NAME="DoWebMx"
+ARG APP_NAME="Portal de Firma Digital"
+ARG APP_DESCRIPTION="Plataforma para la gestión, validación y firma electrónica de documentos digitales."
+ARG APP_URL="https://www.doweb.mx"
+
+# 3. Asignación a variables de entorno para que queden persistentes en la imagen final
+ENV COMPANY_NAME="${COMPANY_NAME:-DoWebMx}"
+ENV APP_NAME="${APP_NAME:-Portal de Firma Digital}"
+ENV APP_DESCRIPTION="${APP_DESCRIPTION:-Plataforma para la gestión, validación y firma electrónica de documentos digitales.}"
+ENV APP_URL="${APP_URL:-https://www.doweb.mx}"
+
+# 4. Copia de logos y assets personalizados a la carpeta public de DocuSeal
+COPY --chown=docuseal:docuseal ./_custom/app/views/pages/landing.html.erb /app/app/views/pages/landing.html.erb
+
+COPY --chown=docuseal:docuseal ./_custom/app/views/shared/_logo.html.erb /app/app/views/shared/_logo.html.erb
+COPY --chown=docuseal:docuseal ./_custom/app/views/shared/_title.html.erb /app/app/views/shared/_title.html.erb
+COPY --chown=docuseal:docuseal ./_custom/app/views/shared/_email_attribution.html.erb /app/app/views/shared/_email_attribution.html.erb
+
+COPY --chown=docuseal:docuseal ./_custom/app/views/submit_form/show.html.erb /app/app/views/submit_form/show.html.erb
+COPY --chown=docuseal:docuseal ./_custom/app/views/submit_form/_docuseal_logo.html.erb /app/app/views/submit_form/_docuseal_logo.html.erb
+
+COPY --chown=docuseal:docuseal ./_custom/app/views/templates_share_link_qr/_logo.html.erb /app/app/views/templates_share_link_qr/_logo.html.erb
+
+COPY --chown=docuseal:docuseal ./_custom/lib/pdf_icons/logo.png /app/lib/pdf_icons/logo.png
+
+COPY --chown=docuseal:docuseal ./_custom/public/apple-icon-180x180.png /app/public/apple-icon-180x180.png
+COPY --chown=docuseal:docuseal ./_custom/public/apple-touch-icon-precomposed.png /app/public/apple-touch-icon-precomposed.png
+COPY --chown=docuseal:docuseal ./_custom/public/apple-touch-icon.png /app/public/apple-touch-icon.png
+COPY --chown=docuseal:docuseal ./_custom/public/favicon-16x16.png /app/public/favicon-16x16.png
+COPY --chown=docuseal:docuseal ./_custom/public/favicon-32x32.png /app/public/favicon-32x32.png
+COPY --chown=docuseal:docuseal ./_custom/public/favicon-96x96.png /app/public/favicon-96x96.png
+COPY --chown=docuseal:docuseal ./_custom/public/favicon.ico /app/public/favicon.ico
+COPY --chown=docuseal:docuseal ./_custom/public/favicon.svg /app/public/favicon.svg
+COPY --chown=docuseal:docuseal ./_custom/public/logo.svg /app/public/logo.svg
+COPY --chown=docuseal:docuseal ./_custom/public/logofull.svg /app/public/logofull.svg
+
+COPY --chown=docuseal:docuseal ./_custom/lib/submissions/generate_audit_trail.rb /app/lib/submissions/generate_audit_trail.rb
+
+COPY --chown=docuseal:docuseal ./_custom/version /app/.version

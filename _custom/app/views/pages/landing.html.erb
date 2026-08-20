@@ -1,0 +1,23 @@
+<section class="flex items-center justify-center">
+  <div class="py-10 mx-auto max-w-7xl">
+    <div class="max-w-xl mx-auto">
+      <div class="text-center">
+        <div class="relative flex flex-col items-center">
+		  <img src="/logofull.svg?v=2" style="height: 100px; width: auto;" alt="Logo" />
+          <h1 class="text-5xl font-bold mt-4 mb-4">
+            <%= ENV['APP_NAME'] %>
+          </h1>
+          <% if Docuseal.version.present? %>
+            <a href="#" target="_blank" class="badge badge-outline badge-lg block mx-auto">
+              v<%= Docuseal.version %>
+            </a>
+          <% end %>
+        </div>
+        <h2 class="mt-4 mb-16 text-lg text-center text-gray-600">
+          <%= ENV['APP_DESCRIPTION'] %>
+        </h2>
+      </div>
+    </div>
+  </div>
+</section>
+<%= render 'shared/attribution', with_counter: false %>
