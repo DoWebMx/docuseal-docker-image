@@ -1,6 +1,6 @@
 # 1. Imagen base oficial
 # FROM docuseal/docuseal:latest
-FROM docuseal/docuseal:3.2.1
+FROM docuseal/docuseal:3.2.3
 
 # 2. Definición de ARG para recibir valores en el build (con fallbacks predeterminados)
 ARG COMPANY_NAME="DoWebMx"
@@ -15,6 +15,9 @@ ENV APP_DESCRIPTION="${APP_DESCRIPTION:-Plataforma para la gestión, validación
 ENV APP_URL="${APP_URL:-https://www.doweb.mx}"
 
 # 4. Copia de logos y assets personalizados a la carpeta public de DocuSeal
+COPY --chown=docuseal:docuseal ./_custom/app/views/shared/_powered_by.html.erb /app/app/views/shared/_powered_by.html.erb
+
+
 COPY --chown=docuseal:docuseal ./_custom/app/views/pages/landing.html.erb /app/app/views/pages/landing.html.erb
 
 COPY --chown=docuseal:docuseal ./_custom/app/views/shared/_logo.html.erb /app/app/views/shared/_logo.html.erb
